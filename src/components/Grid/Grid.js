@@ -9,10 +9,11 @@ const Grid = () => {
   const { videos, loading, isError, error } = useSelector(
     (state) => state.videos
   );
+  const { tags, search } = useSelector((state) => state.filter);
 
   useEffect(() => {
-    dispatch(fetchVideos());
-  }, [dispatch]);
+    dispatch(fetchVideos({ tags, search }));
+  }, [dispatch, tags, search]);
 
   // decide what to render
   let content;
