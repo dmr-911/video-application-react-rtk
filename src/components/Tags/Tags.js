@@ -12,25 +12,15 @@ const Tags = () => {
     dispatch(fetchTags());
   }, [dispatch]);
 
-  // content
-  let content;
-
-  if (loading) content = <Loading />;
-
-  if (!loading && isError) content = <div className="col-span-12">{error}</div>;
-
-  if (!isError && !loading && tags?.length === 0)
-    content = <div className="col-span-12">No videos found!</div>;
-  if (!isError && !loading && tags?.length > 0)
-    content = tags.map((tag) => <Tag key={Tag.id} tag={tag} />);
-
-  return (
+  return tags?.length ? (
     <section>
       <div class="max-w-7xl mx-auto px-5 py-6 lg:px-0 flex gap-2 border-b overflow-y-auto">
-        {content}
+        {tags.map((tag) => (
+          <Tag key={Tag.id} tag={tag} />
+        ))}
       </div>
     </section>
-  );
+  ) : null;
 };
 
 export default Tags;
